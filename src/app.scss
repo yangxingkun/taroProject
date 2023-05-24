@@ -1,4 +1,28 @@
 .custom-tab .custom-text {
-  font-size: 16px; /* 调整字体大小为 16px */
-  margin-top: 4px; /* 调整上边距为 4px */
+  font-size: 16px;
+  /* 调整字体大小为 16px */
+  margin-top: 4px;
+  /* 调整上边距为 4px */
 }
+
+page {
+  background-color: white;
+  padding: 14px;
+  box-sizing: border-box;
+  color: #333;
+}
+
+/* 调整 tabBar 中的字体大小 */
+.taro-tabbar__text {
+  font-size: 22px; /* 修改字体大小为 12px */
+}
+
+// .taro-tabbar__icon{
+// }
+// import A from '@/components/A'
+// import Utils from '@/utils'
+// import packageJson from '@/package'
+// import projectConfig from '@/project'
+
+
+

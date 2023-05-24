@@ -1,15 +1,9 @@
 import React, { useCallback } from "react";
 import { View, Text, Button, Image } from "@tarojs/components";
-import {
-  useEnv,
-  useNavigationBar,
-  useModal,
-  useToast,
-  useRequest,
-} from "taro-hooks";
-import logo from "./hook.png";
-import "./index.scss";
-import Test from "../../components/test/index"
+import { useEnv, useNavigationBar, useModal, useToast } from "taro-hooks";
+
+import './index.scss'
+
 const Index = () => {
   const env = useEnv();
   const [_, { setTitle }] = useNavigationBar({ title: "Taro Hooks" });
@@ -30,16 +24,11 @@ const Index = () => {
 
   return (
     <View className="wrapper">
-      0123132
-      <Test title="杨兴坤"></Test>
-      {/* <custom-component title="Hello World" /> */}
-      <Image className="logo" src={logo} />
-      <Text className="title">456477897为Taro而设计的Hooks Library</Text>
+      <Text className="title">为Taro而设计的Hooks Library</Text>
       <Text className="desc">
         目前覆盖70%官方API. 抹平部分API在H5端短板. 提供近40+Hooks!
         并结合ahook适配Taro!
       </Text>
-
       <View className="list">
         <Text className="label">运行环境</Text>
         <Text className="note">{env}</Text>

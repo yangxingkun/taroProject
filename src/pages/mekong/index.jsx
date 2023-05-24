@@ -1,5 +1,8 @@
 import React, { useCallback } from "react";
-import { View, Text, Button, Image } from "@tarojs/components";
+import { View, Text, Button, Input, Image } from "@tarojs/components";
+import Taro, { useDidShow } from "@tarojs/taro";
+// import { AtButton } from "taro-ui";
+// import CustomTabBar from '../custom-tab-bar'
 import {
   useEnv,
   useNavigationBar,
@@ -7,52 +10,60 @@ import {
   useToast,
   useRequest,
 } from "taro-hooks";
-import logo from "./hook.png";
-// import { AtButton } from "taro-ui";
 import "./index.scss";
-
+import logo from "./hook.png";
 const Index = () => {
-  const env = useEnv();
-
-  const [_, { setTitle }] = useNavigationBar({ title: "Taro Hooks" });
+  useDidShow(() => {
+    console.log("componentDidShow2");
+  });
+  const title = () => {
+    return (
+      <div>
+        <div>请重新输入联系我们</div>
+        <div>获取内测码</div>
+      </div>
+    );
+  };
   const [show] = useModal({
-    title: "Taro Hooks!",
+    title: "内测码错误",
+    content: "请重新输入联系我们获取内测码",
     showCancel: false,
-    confirmColor: "#8c2de9",
-    confirmText: "支持一下",
+    confirmColor: "#1890ff",
+    confirmText: "我知道啦",
     mask: true,
   });
   const [showToast] = useToast({ mask: true });
 
   const handleModal = useCallback(() => {
-    show({ content: "不如给一个star⭐️!" }).then(() => {
-      showToast({ title: "点击了支持!" });
-    });
+    show();
+    // show({ content: "不如给一个star⭐️!" }).then(() => {
+    //   showToast({ title: "点击了支持!" });
+    // });
   }, [show, showToast]);
 
   return (
     <View className="wrapper">
-      <View className="index">
-      <custom-component title="Hello World" />
-
-        {/* <AtButton type="primary">按钮文案</AtButton> */}
+      <View>
+        <Image className="logo" src={logo} />
+        <view className="title">
+          <Text>最懂车的AI助手</Text>
+        </view>
+        <view className="desc">
+          <Text>功能内测中请输入内测码使用</Text>
+        </view>
+        <Input
+          className="wrapper-input"
+          type="text"
+          placeholder="请输入内侧码"
+          placeholderStyle="color:#95969F;font-size:12px"
+        />
+        <Button className="wrapper-button" onClick={handleModal}>
+          确定
+        </Button>
+        <View className="mark">
+          暂无内测码？ <Text className="herf">联系我们</Text>
+        </View>
       </View>
-      <Image className="logo" src={logo} />
-      <Text className="title">456477897为Taro而设计的Hooks Library</Text>
-      <Text className="desc">
-        目前覆盖70%官方API. 抹平部分API在H5端短板. 提供近40+Hooks!
-        并结合ahook适配Taro!
-      </Text>
-      <View className="list">
-        <Text className="label">运行564564456环境</Text>
-        <Text className="note">{env}</Text>
-      </View>
-      <Button className="button" onClick={() => setTitle("Taro Hooks Nice!")}>
-        设置标题
-      </Button>
-      <Button className="button" onClick={handleModal}>
-        使用Modal
-      </Button>
     </View>
   );
 };

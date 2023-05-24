@@ -1,50 +1,38 @@
 import React, { useCallback } from "react";
-import { View, Text, Button, Image } from "@tarojs/components";
-import { useEnv, useNavigationBar, useModal, useToast ,useRequest} from "taro-hooks";
-import logo from "./hook.png";
-
-import './index.scss'
-
+import { View, Text, Button,Input, Image } from "@tarojs/components";
+import Taro, { useDidShow } from "@tarojs/taro";
+// import { AtButton } from "taro-ui";
+// import CustomTabBar from '../custom-tab-bar'
+import "./index.scss";
 const Index = () => {
-  const env = useEnv();
-  const [_, { setTitle }] = useNavigationBar({ title: "Taro Hooks" });
-  const [show] = useModal({
-    title: "Taro Hooks!",
-    showCancel: false,
-    confirmColor: "#8c2de9",
-    confirmText: "支持一下",
-    mask: true,
+  const pageCtx = Taro.getCurrentInstance().page;
+  useDidShow(() => {
+    console.log(pageCtx.getTabBar(),"-=-1=-")
+    const tabbar = Taro.getTabBar(pageCtx)
+    console.log(tabbar,"-=-2=-")
+    tabbar?.setSelected(3);
+    console.log("componentDidShow");
   });
-  const [showToast] = useToast({ mask: true });
 
-  const handleModal = useCallback(() => {
-    show({ content: "不如给一个star⭐️!" }).then(() => {
-      showToast({ title: "点击了支持!" });
-    });
-  }, [show, showToast]);
-
-  return (
-    <View className="wrapper">
-      <Image className="logo" src={logo} />
-      <Text className="title">456477897为Taro而设计的Hooks Library</Text>
-      <Text className="desc">
-        目前覆盖70%官方API. 抹平部分API在H5端短板. 提供近40+Hooks!
-        并结合ahook适配Taro!
-      </Text>
-
-
-      <View className="list">
-        <Text className="label">运行环境</Text>
-        <Text className="note">{env}</Text>
+  return <View className="wrapper">3
+  {/* <CustomTabBar></CustomTabBar> */}
+  <View className='example-body'>
+        <Text>可以自动聚焦的 input</Text>
+          <Input type='text' placeholder='将会获取焦点' focus/>
+          <Text>控制最大输入长度的 input</Text>
+          <Input type='text' placeholder='最大输入长度为 10' maxLength='10'/>
+          <Text>数字输入的 input</Text>
+          <Input type='number' placeholder='这是一个数字输入框'/>
+          <Text>密码输入的 input</Text>
+          <Input type='password' password placeholder='这是一个密码输入框'/>
+          <Text>带小数点的 input</Text>
+          <Input type='digit' placeholder='带小数点的数字键盘'/>
+          <Text>身份证输入的 input</Text>
+          <Input type='idcard' placeholder='身份证输入键盘'/>
+          <Text>控制占位符颜色的 input</Text>
+          <Input type='text' placeholder='占位符字体是红色的' placeholderStyle='color:red'/>
       </View>
-      <Button className="button" onClick={() => setTitle("Taro Hooks Nice!")}>
-        设置标题
-      </Button>
-      <Button className="button" onClick={handleModal}>
-        使用Modal
-      </Button>
-    </View>
-  );
+  </View>;
 };
 
 export default Index;

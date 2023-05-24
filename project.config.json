@@ -1,5 +1,5 @@
 {
-  "miniprogramRoot": "dist/",
+  "miniprogramRoot": "./dist/",
   "projectname": "taro-prodome",
   "description": "project",
   "appid": "wxb1139e16d3c17113",
